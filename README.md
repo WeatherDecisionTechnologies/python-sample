@@ -82,9 +82,7 @@ $ pip install -r requirements.txt
 $ pip install -e .[test]
 $ sample < lightning.json assets.json
 
-The file containing lightning strikes (as single JSON objects) can be found [here]()
-
-The file containing assets (as an array of JSON objects) can be found [here]()
+The files containing lightning strikes (as single JSON objects) and assets (as an array of JSON objects) can be found in this repo.
 
 Feel free to use open source libraries where available...
 
