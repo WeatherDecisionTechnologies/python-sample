@@ -1,16 +1,14 @@
 # Background
 
-WDT creates, ingests, processes, and distributes a large amount of weather data.
+DTN creates, ingests, processes, and distributes a large amount of weather data.
 
 A lot of people rely on this data to make critical life and business decisions. As a result, we need to process this data quickly and reliably.
 
-Since we are a small company with limited resources, it's imperative that our programs function correctly, self-correct when they can, and leave useful clues about what went wrong and how to fix it when they cannot recover.
+It's imperative that our programs function correctly, self-correct when they can, and leave useful clues about what went wrong and how to fix it when they cannot recover.
 
 # Task
 
-Since we process many types of data, and process that data in many different ways, we have implemented a distributed architecture based on message queues.
-
-For the purpose of this task however, we are going to abstract that away and just use the command line as an input source. Your task is to write a program that reads lightning data from stdin (one lightning strike per line as a [JSON](https://en.wikipedia.org/wiki/JSON) object, and matches that data against a source of assets (also in JSON format) to produce an alert.
+Your task is to write a program that reads lightning data from standard input (one lightning strike per line as a JSON object, and matches that data against a source of assets (also in JSON format) to produce an alert.
 
 An example 'strike' coming off of the exchange looks like this:
 ```
@@ -48,7 +46,7 @@ An example of an 'asset' is as follows:
 
 You might notice that the lightning strikes are in lat/long format, whereas the assets are listed in quadkey format.
 
-There is a simple conversion process, outlined [here](http://msdn.microsoft.com/en-us/library/bb259689.aspx) that you can take advantage of. Feel free to use an open source library as well, such as [this](https://github.com/buckhx/QuadKey)
+There is a simple conversion process, outlined [here](http://msdn.microsoft.com/en-us/library/bb259689.aspx) that you can take advantage of. Feel free to use an open source library as well.
 
 For this purpose, you can assume that all asset locations are at a zoom level of '12'.
 
@@ -66,27 +64,20 @@ i.e.:
 lightning alert for 6720:Dante Street
 ```
 
-There's a catch though... Once we know lightning is in the area, we don't want to be alerted for it over & over again. Therefore, if someone (an asset owner) has already received a lightning strike alert for a particular location, we should ignore any additional strikes that occur in that quadkey for that asset owner.
+There's a catch though... Once we know lightning is in the area, we don't want to be alerted for it over & over again. Therefore, if you have already printed an alert for a lightning strike at a particular location, you should ignore any additional strikes that occur in that quadkey for that asset owner.
 
 ---
 
 # Implementation
 
-The code should be written in [pep-8](https://www.python.org/dev/peps/pep-0008/) compliant python. Many developers at WDT use a free editor called [PyCharm](https://www.jetbrains.com/pycharm/download/) that will automatically lint your code and highlight sections of code that might not be pep-8 compliant or incorrect in some other way.
+Since code is read more often than it is written, we want to our projects well structured and the code easy to read. You should make sure your code lints against whatever standards are in common use by the language you choose (i.e. pep-8 for python)
 
-Since code is read more often than it is written, we want to our projects well structured. We have adopted the following structure for laying out projects: https://github.com/mapbox/pyskel You should base your project layout on that.
-
-Your program should be runnable with the following steps (assuming you named your program 'sample'):
-
-$ pip install -r requirements.txt
-$ pip install -e .[test]
-$ sample < lightning.json assets.json
+Your program should also contain a README that contains information about the program and includes steps on how to run the program.
 
 The files containing lightning strikes (as single JSON objects) and assets (as an array of JSON objects) can be found in this repo.
 
 Feel free to use open source libraries where available...
 
-#### Please send us a link to your source code checked in on github. Note that we are a Linux shop and expect the program to run on Linux.
 
 ### What we're looking for
  - Correctness. If the program doesn't run correctly, it doesn't matter how beautiful or efficient it is.
